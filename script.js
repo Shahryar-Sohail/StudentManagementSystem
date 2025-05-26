@@ -1,4 +1,6 @@
 let students = [];
+let attendanceData = [];
+
 fetch('api/data.json')
   .then(response => response.json())
   .then(data => {
@@ -109,6 +111,104 @@ function toggleDarkMode() {
     body.setAttribute('data-bs-theme', 'dark');
   } else {
     body.setAttribute('data-bs-theme', 'light');
+  }
+
+}
+
+// attendance 
+function create(params) {
+  const lectureDate = document.getElementById('calender').value;
+  if (lectureDate != "") {
+    fetch('api/data.json')
+      .then(response => response.json())
+      .then(data => {
+        students = data; // Store the fetched data in the students variable
+        const attendanceTable = document.getElementById('attendanceTable');
+        document.getElementById('studentCount').textContent = `Count: ${students.length}`;
+        document.getElementById('date').textContent = `${lectureDate}`
+
+        data.forEach((student, index) => {
+          const tr = document.createElement('tr');
+          tr.setAttribute('data-id', student.id);
+          // tr.className = '';
+
+          tr.innerHTML = `
+        <td class="p-2">${student.id}</td>
+        <td class="p-2">${student.name}</td>
+        <td class="p-2">
+          <input class="form-check-input bg-secondary" type="checkbox" id="checkbox-${student.id}">
+        </td>
+      `;
+
+          attendanceTable.appendChild(tr);
+        });
+      })
+      .catch(err => console.error('Failed to fetch student data:', err));
+  }
+  else {
+    alert("Please Enter Lecture Date");
+  }
+
+}
+
+// attendance Save 
+function save(params) {
+  attendanceData.length = 0; // clear previous attendance records
+
+  const lectureDate = document.getElementById('calender').value;
+
+  const rows = document.querySelectorAll('#attendanceTable tr');
+  rows.forEach(row => {
+    const studentId = row.getAttribute('data-id');
+    const studentName = row.children[1].textContent; // second column = name
+    const checkbox = row.querySelector('input[type="checkbox"]');
+    const status = checkbox.checked ? "Present" : "Absent";
+
+    attendanceData.push({
+      id: studentId,
+      name: studentName,
+      status: status,
+      date: lectureDate
+    });
+  });
+
+  // Print or store the result
+  console.log(attendanceData);
+  alert("Attendance Saved Successfully");
+}
+
+function view() {
+  const lectureDate = document.getElementById('calender').value;
+  if (attendanceData.length === 0) {
+    alert("No attendance data available to view.");
+    return;
+  }
+  else {
+    // Hide the original attendance table container
+    document.getElementById('attendanceTable').parentElement.style.display = 'none';
+    document.getElementById('saveBtn').style.display = 'none';
+
+    // Show the container of the view table
+    document.getElementById('attendanceViewContainer').style.display = 'block';
+    
+
+    // Set the date in view table
+    document.getElementById('viewDate').textContent = lectureDate;
+
+    // Clear previous rows
+    const viewTableBody = document.getElementById('viewAttendanceTable');
+    viewTableBody.innerHTML = '';
+
+    // Add rows
+    attendanceData.forEach(student => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+      <td class="p-2">${student.id}</td>
+      <td class="p-2">${student.name}</td>
+      <td class="p-2">${student.status}</td>
+    `;
+      viewTableBody.appendChild(tr);
+    });
   }
 
 }
