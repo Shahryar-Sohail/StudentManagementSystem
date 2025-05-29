@@ -106,6 +106,8 @@ function searchStudent() {
 function toggleDarkMode() {
   const body = document.body;
   const currentTheme = body.getAttribute('data-bs-theme');
+  const btn = document.getElementById("btn_toggle");
+  btn.classList.toggle("text-white");
 
   if (currentTheme === 'light') {
     body.setAttribute('data-bs-theme', 'dark');
@@ -190,7 +192,7 @@ function view() {
 
     // Show the container of the view table
     document.getElementById('attendanceViewContainer').style.display = 'block';
-    
+
 
     // Set the date in view table
     document.getElementById('viewDate').textContent = lectureDate;
