@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const User = require('./models/User'); 
 const Attendance = require('./models/Attendance.js');
 const studentRoutes = require('./routes/studentRoutes.js'); 
@@ -8,6 +9,9 @@ const attendanceRoutes = require('./routes/attendanceRoutes');
 
 const app = express();
 const port = 3000;
+
+// Enable CORS for all routes
+app.use(cors());   
 
 // Middleware
 app.use(express.json());
