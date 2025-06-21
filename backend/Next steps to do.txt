@@ -30,11 +30,13 @@ npm init -y – Create package.json.
 Proxy Setup in package.json
 "proxy": "http://localhost:5000" – Point React to backend.
 
-Connect Frontend to API
-Replace data.json logic with API fetch/axios calls.
+✔Connect Frontend to API
+✔Replace data.json logic with API fetch/axios calls.
 
-Update Add/Edit/Delete Logic
+✔Update Add/Edit/Delete Logic
 Use axios.post, axios.put, axios.delete instead of local state manipulation.
+
+Login Implementation
 
 Deploy Both (Optional)
 Deploy backend to Render/Heroku and frontend to Netlify/Vercel.

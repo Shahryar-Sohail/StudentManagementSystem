@@ -5,6 +5,7 @@ const User = require('./models/User');
 const Attendance = require('./models/Attendance.js');
 const studentRoutes = require('./routes/studentRoutes.js'); 
 const attendanceRoutes = require('./routes/attendanceRoutes');
+const authRoutes = require('./routes/auth');
 
 
 const app = express();
@@ -56,7 +57,11 @@ app.use('/api/students', studentRoutes);
 // Mounts all routes from attendanceRoutes.js
 app.use('/api/attendance', attendanceRoutes);
 
+// Routes
+app.use('/api', authRoutes);
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
