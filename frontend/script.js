@@ -6,6 +6,7 @@ fetch('http://localhost:3000/api/students')
   .then(data => {
     students = data; // Store the fetched data in the students variable
     const container = document.getElementById('cardContainer');
+    
     document.getElementById('studentCount').textContent = `Count: ${students.length}`;
 
     data.forEach(student => {
@@ -17,8 +18,8 @@ fetch('http://localhost:3000/api/students')
           <img src="${student.image}" class="card-img-top" style="height: 300px; alt="Student image">
           <div class="card-body">
             <h5 class="card-title">${student.name}</h5>
-            </div>
-            <ul class="list-group list-group-flush">
+          </div>
+          <ul class="list-group list-group-flush">
             
             <input type="hidden" class="mongo-id" value="${student._id}" />
             
@@ -215,6 +216,13 @@ function create(params) {
     alert("Please Enter Lecture Date");
     return;
   }
+const inputDate = new Date(lectureDate).setHours(0, 0, 0, 0);
+const today = new Date().setHours(0, 0, 0, 0);
+
+if (inputDate > today) {
+  alert("Lecture date cannot be in the future");
+  return;
+}
 
   fetch('http://localhost:3000/api/students')
     .then(response => response.json())
@@ -355,7 +363,6 @@ function view() {
 
 
 //Login
-
 document.getElementById("loginForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -374,6 +381,6 @@ document.getElementById("loginForm").addEventListener("submit", async function (
   document.getElementById("msg").textContent = data.message;
 
   if (res.ok) {
-    window.location.href = "index.html"; // redirect after successful login
+    window.location.href = "index.html"; 
   }
 });
