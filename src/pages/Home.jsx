@@ -5,8 +5,8 @@ import axios from 'axios'
 const Home = () => {
   const [students, setStudents] = useState([])
   const [searchQuery, setSearchQuery] = useState('');
-
-useEffect(() => {
+  
+  // ✅ Move fetchStudents here so it's available to all functions
   const fetchStudents = async () => {
     try {
       const res = await axios.get(`http://localhost:3000/api/students?search=${searchQuery}`);
@@ -16,16 +16,18 @@ useEffect(() => {
     }
   };
 
-  // Fetch only if query length >= 1
-  if (searchQuery.length >= 1) {
-    fetchStudents();
-  } else {
-    // Load all if search is cleared
-    axios.get('http://localhost:3000/api/students').then(res => setStudents(res.data));
-  }
-}, [searchQuery]);
+  useEffect(() => {
+    // ✅ Call fetchStudents based on searchQuery
+    if (searchQuery.length >= 1) {
+      fetchStudents();
+    } else {
+      axios.get('http://localhost:3000/api/students')
+        .then(res => setStudents(res.data))
+        .catch(err => console.error('Failed to fetch all students', err));
+    }
+  }, [searchQuery]);
 
-  
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -33,6 +35,25 @@ useEffect(() => {
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleDelete = async (id, name) => {
+    const confirmDelete = window.confirm(`Are you sure you want to delete "${name}"?`);
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/students/${id}`, {
+        method: 'DELETE',
+      });
+
+      const result = await response.json();
+      console.log(result.message);
+
+      fetchStudents(); // refresh after delete
+    } catch (err) {
+      console.error('Delete failed:', err);
+    }
+  };
+
 
 
   return (
@@ -71,7 +92,7 @@ useEffect(() => {
                 </ul>
                 <div className="flex mt-4 md:mt-6">
                   <a href="#" className="inline-flex items-center px-8 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</a>
-                  <a href="#" className="py-2 px-8 ms-2 text-sm font-medium text-white focus:outline-none bg-red-700 rounded-lg border border-gray-200 hover:bg-red-800 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Delete</a>
+                  <a href="#" onClick={() => handleDelete(student._id, student.name)} className="py-2 px-8 ms-2 text-sm font-medium text-white focus:outline-none bg-red-700 rounded-lg border border-gray-200 hover:bg-red-800 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Delete</a>
                 </div>
               </div>
             </div>
