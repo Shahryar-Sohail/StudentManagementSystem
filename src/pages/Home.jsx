@@ -36,7 +36,7 @@ useEffect(() => {
 
 
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid '>
       <Navbar />
 
       {/* form  */}
@@ -48,12 +48,11 @@ useEffect(() => {
       </form>
 
       {/* card  */}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
 
         {students.map((student) => (
-          <div key={student.id} className="w-full px-5 text-lg">
-            <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div key={student.id} className="w-full text-lg">
+            <div className="w-full max-w-sm bg-white border mx-auto border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 
               <div className="flex flex-col items-center pb-10">
                 <img className="w-28 h-28 mb-3 rounded-full shadow-lg" src={`http://localhost:3000/${student.image.replace('./', '')}`} alt="Bonnie image" />
