@@ -4,7 +4,8 @@ A full-stack Student Management System built using:
 
 - ⚛️ **React** + 🎨 **Tailwind CSS** (Frontend)
 - 🚀 **Node.js** + 🔧 **Express.js** (Backend)
-- 🍃 **MongoDB** (Database)
+- 🍃 **MongoDB**   (Database)
+- 🎡 **GitHub**    (Version Control)
 
 ---
 
