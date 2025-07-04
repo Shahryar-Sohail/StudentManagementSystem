@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
+import Edit from '../components/Edit'
 
 const Home = () => {
   const [students, setStudents] = useState([])
+  const [isEdit, setIsEdit] = useState(true);
+  const [editStudentId, setEditStudentId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // ✅ Move fetchStudents here so it's available to all functions
   const fetchStudents = async () => {
     try {
@@ -35,7 +38,7 @@ const Home = () => {
   const filteredStudents = students.filter((student) =>
     student.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
+  // Delete 
   const handleDelete = async (id, name) => {
     const confirmDelete = window.confirm(`Are you sure you want to delete "${name}"?`);
     if (!confirmDelete) return;
@@ -53,6 +56,15 @@ const Home = () => {
       console.error('Delete failed:', err);
     }
   };
+
+  const handleEdit = (id) => {
+    setEditStudentId(id);
+    setIsEdit(true);
+
+
+
+
+  }
 
 
 
@@ -84,14 +96,16 @@ const Home = () => {
 
                   <li className="px-4 py-2 bg-white hover:bg-gray-100">ID: {student.id}</li>
                   <li className="px-4 py-2 bg-white hover:bg-gray-100">Degree Name: {student.degree}</li>
-                  <li className="px-4 py-2 bg-white hover:bg-gray-100">Semester: {student.Semester}</li>
+                  <li className="px-4 py-2 bg-white hover:bg-gray-100">Semester: {student.semester}</li>
                   <li className="px-4 py-2 bg-white hover:bg-gray-100">CGPA: {student.cgpa}</li>
                   <li className="px-4 py-2 bg-white hover:bg-gray-100">Gender: {student.gender}</li>
                   <li className="px-4 py-2 bg-white hover:bg-gray-100">Email: {student.email}</li>
                   <li className="px-4 py-2 bg-white hover:bg-gray-100">Contact: {student.contact}</li>
                 </ul>
                 <div className="flex mt-4 md:mt-6">
-                  <a href="#" className="inline-flex items-center px-8 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</a>
+                  {/* Edit  */}
+                  <a href="#" onClick={() => handleEdit(student._id)} className="inline-flex items-center px-8 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</a>
+                  {/* Delete  */}
                   <a href="#" onClick={() => handleDelete(student._id, student.name)} className="py-2 px-8 ms-2 text-sm font-medium text-white focus:outline-none bg-red-700 rounded-lg border border-gray-200 hover:bg-red-800 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Delete</a>
                 </div>
               </div>
@@ -102,6 +116,13 @@ const Home = () => {
 
       </div>
 
+
+      {isEdit && editStudentId && (
+        <Edit
+          students={students.filter((s) => s._id === editStudentId)}
+          onClose={() => setIsEdit(false)}
+        />
+      )}
 
 
     </div>
