@@ -17,7 +17,7 @@ git clone https://github.com/Shahryar-Sohail/StudentManagementSystem.git
 ```bash
 cd StudentManagementSystem
 ```
-## 🎎For both Front End and Backend use this command to run
+## 🥽For both Front End and Backend use this command to run
 ```bash
 npm run dev
 ```
