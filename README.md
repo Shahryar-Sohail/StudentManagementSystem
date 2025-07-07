@@ -9,7 +9,7 @@ A full-stack Student Management System built using:
 
 ---
 
-## 📦 Clone the Repository
+## 🥼 Clone the Repository
 
 ```bash
 git clone https://github.com/Shahryar-Sohail/StudentManagementSystem.git
