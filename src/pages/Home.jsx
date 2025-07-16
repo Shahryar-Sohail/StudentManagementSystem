@@ -60,10 +60,6 @@ const Home = () => {
   const handleEdit = (id) => {
     setEditStudentId(id);
     setIsEdit(true);
-
-
-
-
   }
 
 
@@ -88,7 +84,7 @@ const Home = () => {
             <div className="w-full max-w-sm bg-white border mx-auto border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 
               <div className="flex flex-col items-center pb-10">
-                <img className="w-28 h-28 mb-3 rounded-full shadow-lg" src={`http://localhost:3000/${student.image.replace('./', '')}`} alt="Bonnie image" />
+                <img className="w-28 h-28 mb-3 rounded-full shadow-lg" src={`http://localhost:3000/${(student.image || './asset/default.jpg').replace('./', '')}`} alt="Bonnie image" />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{student.name}</h5>
 
                 <ul className="w-full divide-y divide-gray-300 border border-gray-300 rounded-md overflow-hidden">
