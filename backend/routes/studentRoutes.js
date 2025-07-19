@@ -4,9 +4,13 @@ const User = require('../models/User');
 
 // 🔹 GET all students
 router.get('/', async (req, res) => {
-  const students = await User.find();
+  const search = req.query.search || '';
+  const students = await User.find({
+    name: { $regex: search, $options: 'i' } // case-insensitive search
+  });
   res.json(students);
 });
+
 
 // 🔹 GET single student by ID
 router.get('/:id', async (req, res) => {

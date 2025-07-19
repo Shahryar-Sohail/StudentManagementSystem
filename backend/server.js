@@ -6,6 +6,8 @@ const Attendance = require('./models/Attendance.js');
 const studentRoutes = require('./routes/studentRoutes.js'); 
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const authRoutes = require('./routes/auth');
+require('dotenv').config(); 
+
 
 
 const app = express();
@@ -16,6 +18,9 @@ app.use(cors());
 
 // Middleware
 app.use(express.json());
+
+const JWT_SECRET = process.env.JWT_SECRET; // Use environment variable for JWT secret
+
 
 // MongoDB connection
 mongoose.connect('mongodb://127.0.0.1:27017/mydb')
@@ -64,4 +69,7 @@ app.use('/api', authRoutes);
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+//Image Fix
+app.use('/asset', express.static('public/asset'));
 
