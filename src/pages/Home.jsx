@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
 import Edit from '../components/Edit'
+import '../App.css'; // Ensure styles are imported
 
 const Home = () => {
   const [students, setStudents] = useState([])
   const [isEdit, setIsEdit] = useState(true);
   const [editStudentId, setEditStudentId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showToast, setShowToast] = useState(false);
 
   // ✅ Move fetchStudents here so it's available to all functions
   const fetchStudents = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/students?search=${searchQuery}`);
-      setStudents(res.data);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/students?search=${searchQuery}`);
+
+      const data = Array.isArray(res.data) ? res.data : res.data.students;
+      setStudents(data || []);
     } catch (err) {
       console.error('Failed to fetch students', err);
     }
@@ -24,7 +28,7 @@ const Home = () => {
     if (searchQuery.length >= 1) {
       fetchStudents();
     } else {
-      axios.get('http://localhost:3000/api/students')
+      const res = axios.get(`${import.meta.env.VITE_API_URL}/api/students`)
         .then(res => setStudents(res.data))
         .catch(err => console.error('Failed to fetch all students', err));
     }
@@ -44,14 +48,21 @@ const Home = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/students/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/students/${id}`, {
         method: 'DELETE',
       });
 
-      const result = await response.json();
-      console.log(result.message);
+      if (response.ok) {
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000); // 2 seconds
 
-      fetchStudents(); // refresh after delete
+        const result = await response.json();
+        console.log(result.message);
+
+        fetchStudents(); // refresh
+      }
     } catch (err) {
       console.error('Delete failed:', err);
     }
@@ -67,6 +78,22 @@ const Home = () => {
   return (
     <div className='container-fluid '>
       <Navbar />
+
+
+    {/* Delete Toast  */}
+      {showToast && (
+        <div
+          className="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in-out flex items-center max-w-xs p-4 text-white bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+        >
+          <div className="inline-flex items-center justify-center w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z" />
+            </svg>
+          </div>
+          <div className="ms-3 text-sm font-normal">User has been deleted.</div>
+        </div>
+      )}
+
 
       {/* form  */}
       <form className="max-w-sm mx-auto mt-5">
@@ -84,7 +111,8 @@ const Home = () => {
             <div className="w-full max-w-sm bg-white border mx-auto border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 
               <div className="flex flex-col items-center pb-10">
-                <img className="w-28 h-28 mb-3 rounded-full shadow-lg" src={`http://localhost:3000/${(student.image || './asset/default.jpg').replace('./', '')}`} alt="Bonnie image" />
+                <img className="w-28 h-28 mb-3 rounded-full shadow-lg" src={`${import.meta.env.VITE_API_URL}/${(student.image || './asset/default.jpg').replace('./', '')}`}
+                  alt="Student Image" />
                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{student.name}</h5>
 
                 <ul className="w-full divide-y divide-gray-300 border border-gray-300 rounded-md overflow-hidden">

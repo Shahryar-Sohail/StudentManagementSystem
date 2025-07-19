@@ -11,8 +11,8 @@ function App() {
       {/* <Route path="/home" element={<Home />} /> */}
       <Route path="/addStudent" element={<AddStudent />} />
       <Route path="/attendance" element={<Attendance />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Home />} /> {/* Optional: default route */}
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} /> {/* Optional: default route */}
     </Routes>
   );
 }

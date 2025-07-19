@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import Navbar from '../components/Navbar';       
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/LoginNavbar';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -11,7 +11,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('http://localhost:3000/api/login', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
@@ -21,7 +21,8 @@ export default function Login() {
     setMsg(data.message);
 
     if (res.ok) {
-      navigate('/home'); // ✅ react-router navigation
+      localStorage.setItem('token', data.token); // ✅ Save token here
+      navigate('/home');
     }
   };
 
@@ -29,6 +30,10 @@ export default function Login() {
     <>
       <Navbar />
 
+
+      <div className='flex justify-center mt-10 text-4xl text-gray-700  '>
+        <h1>Login Page</h1>
+      </div>
       <form
         onSubmit={handleSubmit}
         className="w-11/12 lg:w-1/2 mx-auto my-10 p-8 bg-white rounded shadow"

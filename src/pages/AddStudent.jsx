@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
-
+import '../App.css';
 const AddStudent = () => {
+
+  const [showToast, setShowToast] = useState(false);
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,9 +15,13 @@ const AddStudent = () => {
     const student = Object.fromEntries(data.entries());
 
     try {
-      const res = await axios.post('http://localhost:3000/api/students', student);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/students`, student);
       console.log(res.data);
-      alert("Student added successfully");
+        form.reset(); // 🔄 Clear all inputs
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 2000); // 2 seconds
     } catch (err) {
       console.error(err);
       alert("Error adding student");
@@ -23,6 +31,24 @@ const AddStudent = () => {
   return (
     <div>
       <Navbar />
+
+   {/* Add Toast  */}
+{showToast && (
+  <div
+    className="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in-out flex items-center max-w-xs py-4 px-8 text-white bg-green-500 rounded-lg shadow"
+  >
+    {/* This wrapper needs flex to align icon + text horizontally */}
+    <div className="flex items-center">
+      <div className="inline-flex items-center justify-center shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+        </svg>
+      </div>
+      <div className="ms-3 text-sm font-normal">User Added</div>
+    </div>
+  </div>
+)}
+
 
       <h1 className='text-center text-4xl font-semibold mt-10'>Add New Student</h1>
 
