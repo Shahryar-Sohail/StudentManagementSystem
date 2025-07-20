@@ -1,0 +1,42 @@
+Backend Setup (Inside backend/ folder)
+Initialize Node Project
+npm init -y – Create package.json.
+
+✔Install Dependencies
+✔npm install express mongoose cors dotenv – Install required libraries.
+
+✔Create Entry File (server.js or app.js)
+✔Start your Express server and connect to MongoDB.
+
+✔Create Models Folder and Schema (e.g., Student.js)
+✔Define Mongoose schemas for Student and Attendance.
+
+✔Create Routes Folder (e.g., studentRoutes.js)
+✔Add CRUD APIs for Students: GET, POST, PUT, DELETE.
+
+✔Create Attendance Routes (attendanceRoutes.js)
+✔Add APIs to mark and fetch attendance data.
+
+❌Create Controllers (optional but recommended)
+❌Move logic from routes to controller functions for clean code.
+
+✔Enable Middleware in server.js
+✔Use express.json(), cors(), and route imports.
+
+✔Test APIs using Postman
+✔Verify API endpoints (GET/POST/PUT/DELETE) work correctly.
+------------------------------------------------------------------
+✅ Frontend Integration (Inside frontend/ folder)
+Proxy Setup in package.json
+"proxy": "http://localhost:5000" – Point React to backend.
+
+✔Connect Frontend to API
+✔Replace data.json logic with API fetch/axios calls.
+
+✔Update Add/Edit/Delete Logic
+Use axios.post, axios.put, axios.delete instead of local state manipulation.
+
+Login Implementation
+
+Deploy Both (Optional)
+Deploy backend to Render/Heroku and frontend to Netlify/Vercel.
