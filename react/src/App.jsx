@@ -4,6 +4,8 @@ import Home from './pages/Home';
 import AddStudent from './pages/AddStudent';
 import Attendance from './pages/Attendance';
 import Login from './pages/Login';
+import 'flowbite';
+import './index.css';
 
 function App() {
   return (

@@ -27,16 +27,16 @@ export default function Login() {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       <Navbar />
 
 
-      <div className='flex justify-center mt-10 text-4xl text-gray-700  '>
+      <div className='flex justify-center mt-10 text-4xl text-gray-700  dark:text-white'>
         <h1>Login Page</h1>
       </div>
       <form
         onSubmit={handleSubmit}
-        className="w-11/12 lg:w-1/2 mx-auto my-10 p-8 bg-white rounded shadow"
+        className="w-11/12 lg:w-1/2 mx-auto my-10 p-8 bg-white rounded shadow dark:bg-gray-800"
       >
         <div className="mb-6 flex justify-center">
           <input
@@ -69,18 +69,18 @@ export default function Login() {
         <p className="text-center mt-4 text-red-500">{msg}</p>
       </form>
 
-      <div className='flex justify-center mt-5 '>
-        <button data-tooltip-target="tooltip-default" type="button" class="text-white bg-red-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Credentials Here</button>
-
-        <div id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-          Username: admin<br />
-          Password: admin
-          <div class="tooltip-arrow" data-popper-arrow></div>
+      <div className='flex justify-center '>
+        <button data-tooltip-target="tooltip-click" data-tooltip-trigger="click" type="button" className="ms-3 text-white bg-blue-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Credentials</button>
+        <div id="tooltip-click" role="tooltip" className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+          Username: <span className='text-blue-500'>admin</span> <br />
+          Password: <span className='text-blue-500'>admin</span>
+          <div className="tooltip-arrow" data-popper-arrow />
         </div>
       </div>
 
 
-    </>
+
+    </div>
 
   );
 }

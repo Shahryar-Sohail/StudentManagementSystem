@@ -120,8 +120,6 @@ const Attendance = () => {
       {/* Date Time  */}
 
       <div className='mt-10 justify-center flex'>
-
-
         <div className="relative max-w-sm w-40">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -136,9 +134,8 @@ const Attendance = () => {
       </div>
 
       {/* Table  */}
-
-      <div className='flex justify-center mt-10 px-1 sm:px-16 '>
-        <div className="w-full sm:w-1/2 relative overflow-x-auto border rounded-lg shadow-md sm:rounded">
+      <div className='flex justify-center mt-10 px-4 sm:px-16'>
+        <div className="w-full relative overflow-x-auto border rounded-lg shadow-md sm:rounded">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
