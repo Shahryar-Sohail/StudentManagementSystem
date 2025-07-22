@@ -17,7 +17,7 @@ export default function Navbar() {
         <nav className="bg-yellow-400 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/home" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap mx-4 dark:text-white">SMS</span>
+                    <span className="self-center text-2xl font-semibold whitespace-nowrap mx-4 dark:text-white text-black">SMS</span>
                 </a>
 
                 <button
@@ -63,7 +63,7 @@ export default function Navbar() {
                         <li>
                             <button
                                 onClick={toggleDark}
-                                className="px-3 py-2 bg-transparent text-gray-900 dark:text-white rounded hover:bg-gray-600"
+                                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                             >
                                 Toggle Mode
                             </button>

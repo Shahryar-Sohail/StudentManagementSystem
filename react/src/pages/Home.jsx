@@ -110,13 +110,13 @@ const Home = () => {
       </form>
 
       {/* card  */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 px-5 dark:bg-gray-900 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 px-5 dark:bg-gray-900 bg-white">
         {loading
           ? [...Array(6)].map((_, i) => <Skeleton key={i} />)
           : students.map((student) => (
             <div key={student.id} className="w-full text-lg">
-              <div className="w-full max-w-sm mx-auto bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-                <div className="flex flex-col items-center pb-10 ">
+              <div className="w-full max-w-sm mx-auto bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
+                <div className="flex flex-col items-center pb-10 px-3 ">
                   <img
                     className="w-28 h-28 mb-3 rounded-full shadow-lg "
                     src={`${import.meta.env.VITE_API_URL}/${(student.image || './asset/default.jpg').replace('./', '')}`}
@@ -124,13 +124,13 @@ const Home = () => {
                   />
                   <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{student.name}</h5>
                   <ul className="w-full divide-y divide-gray-300 border border-gray-300 rounded-md overflow-hidden ">
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">ID: {student.id}</li>
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">Degree Name: {student.degree}</li>
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">Semester: {student.semester}</li>
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">CGPA: {student.cgpa}</li>
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">Gender: {student.gender}</li>
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">Email: {student.email}</li>
-                    <li className="px-4 py-2 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:text-white">Contact: {student.contact}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">ID: {student.id}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">Degree Name: {student.degree}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">Semester: {student.semester}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">CGPA: {student.cgpa}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">Gender: {student.gender}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">Email: {student.email}</li>
+                    <li className="px-4 py-2 bg-white text-black hover:bg-gray-100 dark:bg-gray-900 dark:text-white">Contact: {student.contact}</li>
                   </ul>
                   <div className="flex mt-4 md:mt-6">
                     <a href="#" onClick={() => handleEdit(student._id)} className="inline-flex items-center px-8 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">Edit</a>

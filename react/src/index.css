@@ -7,6 +7,12 @@
     animation: fadeInOut 2s ease-in-out forwards;
   }
 
+  @media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
+}
+
   @keyframes fadeInOut {
     0% { opacity: 0; transform: translateY(-20px); }
     20% { opacity: 1; transform: translateY(0); }
