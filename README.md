@@ -52,7 +52,7 @@ Built with ❤️ using **MERN Stack**!
 ```bash
 git clone https://github.com/your-username/student-management-system.git
 cd student-management-system
-```bash
+
 
 
 cd frontend
@@ -64,11 +64,10 @@ cd backend
 npm install     # 📦 Install backend dependencies
 npm run dev     # 🚀 Start backend server using nodemon or dev script
 
-
 PORT=5000
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_secret_key
-
+```
 
 🧑‍💻 Developed By
 Shahryar Sohail — 💻 MERN Stack & 🤖 AI Dev  
