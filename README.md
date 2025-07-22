@@ -71,3 +71,7 @@ JWT_SECRET=your_secret_key
 
 🧑‍💻 Developed By
 Shahryar Sohail — 💻 MERN Stack & 🤖 AI Dev  
+
+![App Preview](./1.png)
+![App Preview](./2.png)
+![App Preview](./3.png)
