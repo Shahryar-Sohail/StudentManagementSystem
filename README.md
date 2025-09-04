@@ -1,7 +1,7 @@
 # 🎓 Student Management System 📚
 
 A full-stack web app to manage students, attendance, and authentication with a clean UI!  
-Built with ❤️ using **MERN Stack**!
+Built with ❤️ using **MERN Stack***!
 
 ---
 
